@@ -1,1 +1,1 @@
-# AI_a4_reinformentLearning
+# AI_a4_reinforcement_learning
