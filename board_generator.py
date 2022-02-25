@@ -2,6 +2,7 @@ import random
 
 
 def generate_board(x, y, file_name):
+    # generate board for testing purpose
     with open(file_name, 'w') as file:
         for i in range(x):
             if i != 0:
