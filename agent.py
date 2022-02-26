@@ -64,7 +64,7 @@ class Agent:
         best_action = None
         best_utility = -9999
         for action in Action:
-            if self.q_table.get_utility(self.current_x, self.current_y, action) >= best_utility:
+            if self.q_table.get_utility(self.current_x, self.current_y, action) > best_utility:
                 best_action = action
         return best_action
 
