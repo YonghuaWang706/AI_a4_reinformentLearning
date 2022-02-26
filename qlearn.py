@@ -3,13 +3,6 @@ from agent import Agent
 from time import time
 
 
-# def run_qlearning():
-#     while not_reach_time_limit() or not_terminal_state:
-#         next_location = get_next_location() # also handle the deviate
-#         agent.move(next_location) # after moving, update the Q_table as well
-#         update_Qtable()
-#         not_terminal_state = q_table.is_terminal_state(next_location)
-
 class Q_Learning:
     def __init__(self, seconds_to_tun, constant_reward, file_name, greedy_epsilon, alpha=0.1, gamma=0.9):
         self.agent = Agent(file_name, greedy_epsilon)
@@ -43,14 +36,13 @@ class Q_Learning:
 
 
 if __name__ == '__main__':
-    #instance = Q_Learning(10, 0.2, 1, -1, 'sample.txt', 0.1)
     if len(sys.argv) < 4:
         sys.exit("invalid argument, try python3 qlearn.py <file> <seconds to run> <probability to move in desired "
                  "direction> <reward>")
     temp, filename, runtime, prob, reward = sys.argv
     runtime = float(runtime)
     prob = float(prob)
-    reward = float(prob)
+    reward = float(reward)
     instance = Q_Learning(runtime, reward, filename, prob)
     instance.agent.q_table.initialize_table()
     instance.run_Q_learning()

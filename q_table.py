@@ -14,12 +14,6 @@ class QTable:
         self.input_file_name = file_name
         self.max_x = 0
         self.max_y = 0
-        # use (x, y , Action) as the key to query the utility?
-        # [(x.y)][action]
-        # {(1,1) : { isTerminal : true, utility: 0.5  }}
-        # (1,1) -> (1,2)
-        # Utility((1,1), action) <- Utility((1,1), action) + alpha * (reward +  gamma * Max(Utility((1,2), one_of_actions) - Utility((1,1), action) )
-        # self.table = {}
 
     def is_terminal_state(self, x, y):
         # given coordinate, return true is that state is a terminal state
@@ -84,8 +78,3 @@ class QTable:
                     print(action_figure[best_action], end='\t')
             print("\n")
 
-
-# if __name__ == '__main__':
-#     q_table_instance = QTable('sample.txt')
-#     q_table_instance.initialize_table()
-#     print(q_table_instance.q_table)
