@@ -38,7 +38,7 @@ class QTable:
                     score = int(number)
                     self.q_table[key] = {}
                     self.q_table[key]["score"] = score
-                    self.q_table[key]["is_terminal_state"] = score != 0
+                    self.q_table[key]["is_terminal_state"] = (score != 0)
                     for action in Action:
                         self.q_table[key][action] = score
                     j_index += 1
@@ -85,7 +85,7 @@ class QTable:
             print("\n")
 
 
-if __name__ == '__main__':
-    q_table_instance = QTable('sample.txt')
-    q_table_instance.initialize_table()
-    print(q_table_instance.q_table)
+# if __name__ == '__main__':
+#     q_table_instance = QTable('sample.txt')
+#     q_table_instance.initialize_table()
+#     print(q_table_instance.q_table)

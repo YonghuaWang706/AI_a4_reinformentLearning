@@ -32,7 +32,7 @@ class Agent:
 
     def get_next_action_deviate(self, action):
         # deviate the action depending on the probability
-        half_epsilon = self.greedy_epsilon / 2
+        half_epsilon = (1 - self.greedy_epsilon) / 2
         explore_probability = random.uniform(0, 1)
         if half_epsilon < explore_probability < (1 - half_epsilon):
             return action
@@ -54,9 +54,9 @@ class Agent:
                     return Action.up
             case Action.down:
                 if explore_probability < half_epsilon:
-                    return Action.left
-                else:
                     return Action.right
+                else:
+                    return Action.left
         raise 'cannot identify next action'
 
     def find_next_best_action(self):
@@ -66,6 +66,7 @@ class Agent:
         for action in Action:
             if self.q_table.get_utility(self.current_x, self.current_y, action) > best_utility:
                 best_action = action
+                best_utility = self.q_table.get_utility(self.current_x, self.current_y, best_action)
         return best_action
 
     def fix_edge_case(self, action):
@@ -78,42 +79,42 @@ class Agent:
             return next_x, next_y
         if self.current_y == max_y and self.current_x == max_x:  # right bottom corner
             if action is Action.down or action is Action.right:
-                return 0, 0
+                return self.current_x, self.current_y
             else:
                 return next_x, next_y
         if self.current_y == self.current_x == 0:  # left top corner
             if action is Action.left or action is Action.up:
-                return 0, 0
+                return self.current_x, self.current_y
             else:
                 return next_x, next_y
         if self.current_y == max_y and self.current_x == 0:  # right top corner
             if action is Action.up or action is Action.right:
-                return 0, 0
+                return self.current_x, self.current_y
             else:
                 return next_x, next_y
         if self.current_y == 0 and self.current_x == max_x:  # left bottom corner
             if action is Action.left or action is Action.down:
-                return 0, 0
+                return self.current_x, self.current_y
             else:
                 return next_x, next_y
         if self.current_y == 0:  # most left
             if action is Action.left:
-                return 0, 0
+                return self.current_x, self.current_y
             else:
                 return next_x, next_y
         if self.current_y == max_y:  # most right
             if action is Action.right:
-                return 0, 0
+                return self.current_x, self.current_y
             else:
                 return next_x, next_y
         if self.current_x == max_x:  # bottom
             if action is Action.down:
-                return 0, 0
+                return self.current_x, self.current_y
             else:
                 return next_x, next_y
         if self.current_x == 0:  # top
             if action is Action.up:
-                return 0, 0
+                return self.current_x, self.current_y
             else:
                 return next_x, next_y
         raise 'fix edge failed'
