@@ -22,8 +22,8 @@ class Q_Learning:
     def run_Q_learning(self):
         # run Q learning
         self.start_time = time()
-        self.agent.pick_start_location()
         while self.not_reach_time_limit():
+            self.agent.pick_start_location()
             while not self.agent.q_table.is_terminal_state(self.agent.current_x, self.agent.current_y):
                 next_best_action = self.agent.find_next_best_action()
                 deviate_action = self.agent.get_next_action_deviate(next_best_action)

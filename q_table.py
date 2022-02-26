@@ -55,7 +55,7 @@ class QTable:
 
     def get_action_highest_utility(self, next_location):
         # given current location, find next action with the highest utility
-        next_location_max_utility = 0
+        next_location_max_utility = -9999
         for action in Action:
             current_utility = self.q_table[next_location][action]
             if current_utility > next_location_max_utility:
@@ -68,6 +68,7 @@ class QTable:
 
     def print_training_result(self):
         # print the training result, the best action to take on each location
+        action_figure = {Action.up: '^', Action.down: 'v', Action.left: '<', Action.right: '>'}
         for i in range(self.max_x + 1):
             for j in range(self.max_y + 1):
                 best_action = None
@@ -75,8 +76,12 @@ class QTable:
                 action_dict = self.q_table[(i, j)]
                 for action in Action:
                     if action_dict[action] > best_utility_sofar:
+                        best_utility_sofar = action_dict[action]
                         best_action = action
-                print(str(best_action), end='\t')
+                if self.is_terminal_state(i, j):
+                    print(self.q_table[(i,j)]['score'], end='\t')
+                else:
+                    print(action_figure[best_action], end='\t')
             print("\n")
 
 

@@ -57,11 +57,12 @@ class Agent:
                     return Action.left
                 else:
                     return Action.right
+        raise 'cannot identify next action'
 
     def find_next_best_action(self):
         # find the best action the agent should take
         best_action = None
-        best_utility = 0
+        best_utility = -9999
         for action in Action:
             if self.q_table.get_utility(self.current_x, self.current_y, action) >= best_utility:
                 best_action = action
@@ -115,3 +116,5 @@ class Agent:
                 return 0, 0
             else:
                 return next_x, next_y
+        raise 'fix edge failed'
+
